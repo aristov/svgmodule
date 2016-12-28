@@ -3,6 +3,6 @@
 /node_modules/
 /dist/
 /tmp/
-/index.html
+/index.svg
 /sauce_connect.log
 /npm-debug.log
