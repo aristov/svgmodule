@@ -87,8 +87,8 @@ switch(env.ENTRY) {
             postcss : () => [autoprefixer],
         });
         plugins.push(new CopyWebpackPlugin([{
-            from : './docs/index.html',
-            to : '../../index.html'
+            from : './docs/index.svg',
+            to : '../../index.svg'
         }]));
         break;
     case 'dist':
