@@ -1,0 +1,8 @@
+.DS_Store
+/.idea/
+/node_modules/
+/dist/
+/tmp/
+/index.html
+/sauce_connect.log
+/npm-debug.log
