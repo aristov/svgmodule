@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<space>
+    <place name="fusion" type="studio">
+        <place name="techno" type="office"/>
+        <wall orientation="vertical" type="brick"/>
+        <place name="operate">
+            <place name="classic">
+                <place name="intro" type="common"/>
+                <wall orientation="vertical" type="block"/>
+                <place name="do">
+                    <place name="start" type="common">
+                        <place name="base" type="common"/>
+                        <wall orientation="vertical" type="gas"/>
+                        <place name="piano" type="work"/>
+                    </place>
+                    <wall orientation="horizontal" type="gas"/>
+                    <place name="forte" type="work"/>
+                </place>
+            </place>
+            <wall orientation="vertical" type="block"/>
+            <place name="modern">
+                <place name="concrete">
+                    <place name="social" type="common"/>
+                    <wall orientation="horizontal" type="gypsum"/>
+                    <place name="pantry" type="storage"/>
+                </place>
+                <angle orientation="left bottom"/>
+                <place name="ancient">
+                    <place name="sol" type="work"/>
+                    <wall orientation="horizontal" type="block"/>
+                    <place name="fa" type="work"/>
+                </place>
+                <wall type="gypsum"/>
+                <place name="neo" type="work"/>
+            </place>
+        </place>
+    </place>
+</space>

@@ -1,0 +1,33 @@
+.wall
+{
+    fill: #eee;
+}
+
+.room,
+.way,
+.office
+{
+    fill: transparent;
+}
+
+.room:hover,
+.room:focus
+{
+    fill: rgba(255, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+}
+.room:focus
+{
+    fill: rgba(255, 0, 0, 0.3);
+}
+
+.office:hover
+{
+    fill: rgba(0, 0, 255, 0.05);
+}
+
+.way:hover
+{
+    fill: rgba(0, 255, 0, 0.05)
+}
