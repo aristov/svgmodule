@@ -1,4 +1,4 @@
-import { svg, g, circle, rect, line, polyline, polygon, image, style } from '../lib/svgdom'
+import { svg, rect, polygon } from '../lib/svgdom'
 
 const x = 0
 const y = 0

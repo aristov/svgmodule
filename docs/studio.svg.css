@@ -1,13 +1,17 @@
+svg#root > rect
+{
+    fill: #888;
+}
 svg.place > rect
 {
-    fill: rgba(0, 0, 0, 0.1);
-    stroke: #000;
+    fill: #fff;
+    strokeWidth: 0;
 }
 svg.place > rect:hover
 {
-    fill: #fff;
+    fill: rgba(0, 255, 255, 0.1);
 }
-svg.place > line.wall
+svg.place > rect.wall
 {
-    stroke: #000;
+    fill: #000;
 }

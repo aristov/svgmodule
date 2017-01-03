@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="studio.svg.css"?>
 <svg xmlns="http://www.w3.org/2000/svg">
-    <!--<svg x="100" y="100"><rect width="100" height="100"/></svg>-->
     <script href="../dist/docs/build.index.js"/>
 </svg>

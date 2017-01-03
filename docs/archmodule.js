@@ -1,31 +1,43 @@
 import { SVGDOMAssembler } from '../lib/assembler'
 import { rect } from '../lib/svgdom'
 
-const { forEach } = Array.prototype
+const { map } = Array.prototype
 
 export class Place extends SVGDOMAssembler {
     constructor(node) {
         super()
         this.assemble('svg', {
             className : 'place',
-            children : rect({
-                width : node.getAttribute('width') || window.innerWidth,
-                height : node.getAttribute('height') || window.innerHeight
-            })
+            id : node.getAttribute('name') || undefined,
+            width : node.getAttribute('width') || window.innerWidth,
+            height : node.getAttribute('height') || window.innerHeight,
+            children : rect({ width : '100%', height : '100%' })
+        })
+        this.children = map.call(node.children, child => {
+            return child.tagName === 'wall'?
+                /*new Wall({
+                    id : node.getAttribute('name'),
+                    width : child.getAttribute('width'),
+                    height : child.getAttribute('height'),
+                    x1 : node.getAttribute('x') || 0,
+                    y1 : node.getAttribute('y') || 0,
+                }) :*/
+                new Wall(child) :
+                new Place(child)
         })
     }
 }
 
 export class Wall extends SVGDOMAssembler {
-    constructor(init) {
+    constructor(node) {
         super()
-        this.assemble('line', {
-            className : 'wall',
-            x1 : init.x || 0,
-            y1 : 0,
-            x2 : init.x,
-            y2 : init.height
-        })
+        const width = node.getAttribute('width')
+        const height = node.getAttribute('height')
+        if(!height || width < height) {
+            this.assemble('line', {
+                className : 'wall',
+            })
+        }
     }
 }
 

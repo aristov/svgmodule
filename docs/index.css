@@ -1,6 +1,6 @@
 .wall
 {
-    fill: #eee;
+    fill: #000;
 }
 
 .room,
@@ -29,5 +29,5 @@
 
 .way:hover
 {
-    fill: rgba(0, 255, 0, 0.05)
+    fill: rgba(0, 255, 0, 0.05);
 }
