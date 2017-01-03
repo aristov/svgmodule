@@ -1,8 +1,5 @@
 import { svg, rect } from '../lib/svgdom'
 
-// const svgroot = document.documentElement
-// const parser = new DOMParser
-
 const xmlroot = document.documentElement
 
 xmlroot.replaceWith(svg({
@@ -66,17 +63,3 @@ function process(node) {
         return svgnode
     }
 }
-
-/*fetch('studio.xml')
-    .then(res => res.text())
-    .then(xml => {
-        const xmldoc = parser.parseFromString(xml, 'application/xml')
-        const xmlroot = xmldoc.documentElement
-        svgroot.replaceWith(svg({
-            id : 'root',
-            children : [
-                rect({ width: '100%', height: '100%' }),
-                process(xmlroot)
-            ]
-        }))
-    })*/
