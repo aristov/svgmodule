@@ -1,14 +1,24 @@
 import { svg, rect } from '../lib/svgdom'
 
-const svgroot = document.documentElement
-const parser = new DOMParser
+// const svgroot = document.documentElement
+// const parser = new DOMParser
+
+const xmlroot = document.documentElement
+
+xmlroot.replaceWith(svg({
+    id : 'root',
+    children : [
+        rect({ width: '100%', height: '100%' }),
+        process(xmlroot)
+    ]
+}))
 
 function place(node) {
     return svg({
         x : node.getAttribute('x') || undefined,
         y : node.getAttribute('y') || undefined,
-        className : node.tagName,
         id : node.id,
+        className : node.tagName,
         children : rect({
             width : node.getAttribute('width') || undefined,
             height : node.getAttribute('height') || undefined
@@ -17,11 +27,10 @@ function place(node) {
 }
 
 function wall(node) {
-    let x = node.getAttribute('x') || undefined;
-    let y = node.getAttribute('y') || undefined;
-    let width = node.getAttribute('width') || undefined;
-    let height = node.getAttribute('height') || undefined;
-    if(node.id === 'fuck') console.log(node)
+    let x = node.getAttribute('x') || undefined
+    let y = node.getAttribute('y') || undefined
+    let width = node.getAttribute('width') || undefined
+    let height = node.getAttribute('height') || undefined
     return rect({
         className : node.tagName,
         x, y, width, height
@@ -35,7 +44,7 @@ function process(node) {
     const height = node.getAttribute('height')
     const wallnode = node.children[1]
     if(node.tagName === 'wall') return wall(node)
-    else {
+    else if(node.tagName === 'place') {
         const svgnode = place(node)
         Array.prototype.forEach.call(node.children, child => {
             if(!child.getAttribute('width')) child.setAttribute('width', width)
@@ -49,7 +58,8 @@ function process(node) {
                 if(Number(child.getAttribute('height')) < Number(node.getAttribute('height'))) {
                     y += Number(child.getAttribute('height'))
                 }
-                svgnode.append(process(child))
+                const childnode = process(child)
+                if(childnode) svgnode.append(childnode)
             }
             process(child)
         })
@@ -57,7 +67,7 @@ function process(node) {
     }
 }
 
-fetch('studio.xml')
+/*fetch('studio.xml')
     .then(res => res.text())
     .then(xml => {
         const xmldoc = parser.parseFromString(xml, 'application/xml')
@@ -69,4 +79,4 @@ fetch('studio.xml')
                 process(xmlroot)
             ]
         }))
-    })
+    })*/

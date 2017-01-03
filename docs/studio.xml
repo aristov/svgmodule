@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet href="studio.xml.css"?>
+<?xml-stylesheet href="studio.svg.css"?>
 <place id="fusion" width="2253" height="1020" type="studio">
     <place id="operate" width="1885">
         <place width="1427">
@@ -40,4 +40,5 @@
     </place>
     <wall type="brick" width="40"/>
     <place id="techno" type="office" width="328"/>
+    <script xmlns="http://www.w3.org/1999/xhtml" src="../dist/docs/build.index.js"/>
 </place>
