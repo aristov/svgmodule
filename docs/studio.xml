@@ -18,18 +18,18 @@
             </place>
             <wall type="block" width="20"/>
             <place id="modern" width="775">
-                <place width="613">
-                    <place id="concrete" height="180"/>
+                <place width="613" hidden="true">
+                    <place id="concrete" height="180" hidden="true"/>
                     <wall type="block" height="20"/>
-                    <place id="radio" height="820">
+                    <place id="radio" height="820" hidden="true">
                         <place id="sol" type="work" height="380"/>
                         <wall type="block" height="20"/>
                         <place id="fa" type="work" height="420"/>
                     </place>
                 </place>
                 <wall type="block" y="180" width="20" height="840"/>
-                <place id="common" y="0" width="142">
-                    <place id="pass" height="850"/>
+                <place id="common" y="0" width="142" hidden="true">
+                    <place id="pass" height="850" hidden="true"/>
                     <wall type="gypsum" height="10"/>
                     <place id="pantry" height="160"/>
                 </place>

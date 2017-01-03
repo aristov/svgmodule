@@ -2,32 +2,32 @@ import { XMLDOMAssembler } from '../lib/xmlassembler'
 import { svg, rect } from '../lib/svgdom'
 
 class Rectangle extends XMLDOMAssembler {
-    constructor(node) {
-        super(node)
-    }
     set width(width) {
         this.node.setAttribute('width', width)
     }
     get width() {
-        return Number(this.node.getAttribute('width') || 0)
+        return Number(this.node.getAttribute('width'))
     }
     set height(height) {
         this.node.setAttribute('height', height)
     }
     get height() {
-        return Number(this.node.getAttribute('height') || 0)
+        return Number(this.node.getAttribute('height'))
     }
     set x(x) {
         this.node.setAttribute('x', x)
     }
     get x() {
-        return Number(this.node.getAttribute('x') || 0)
+        return Number(this.node.getAttribute('x'))
     }
     set y(y) {
         this.node.setAttribute('y', y)
     }
     get y() {
-        return Number(this.node.getAttribute('y') || 0)
+        return Number(this.node.getAttribute('y'))
+    }
+    get hidden() {
+        return this.node.getAttribute('hidden')
     }
 }
 
@@ -43,12 +43,14 @@ xmlroot.replaceWith(svg({
 
 function place(node) {
     const rectangle = new Rectangle(node)
+    const type = rectangle.attributes.type
     return svg({
         x : rectangle.x,
         y : rectangle.y,
         id : rectangle.id,
-        className : node.tagName,
-        children : rect({
+        classList : [node.tagName, type],
+        tabIndex : type === 'work'? 0 : undefined,
+        children : !rectangle.hidden && rect({
             width : rectangle.width,
             height : rectangle.height
         })
@@ -57,42 +59,34 @@ function place(node) {
 
 function wall(node) {
     const rectangle = new Rectangle(node)
-    let x = rectangle.x
-    let y = rectangle.y
-    let width = rectangle.width
-    let height = rectangle.height
     return rect({
         className : node.tagName,
-        x, y, width, height
+        x : rectangle.x,
+        y : rectangle.y,
+        width : rectangle.width,
+        height : rectangle.height
     })
 }
 
-function transform(node) {
-    const rectangle = new Rectangle(node)
-    let x = 0
-    let y = 0
-    const width = rectangle.width
-    const height = rectangle.height
-    const wallnode = node.querySelector('wall')
-    if(node.tagName === 'wall') return wall(node)
-    else if(node.tagName === 'place') {
-        const svgnode = place(node)
-        rectangle.children.forEach(child => {
-            if(!child.getAttribute('width')) child.setAttribute('width', width)
-            if(!child.getAttribute('height')) child.setAttribute('height', height)
-            if(!child.getAttribute('x')) child.setAttribute('x', String(x))
-            if(!child.getAttribute('y')) child.setAttribute('y', String(y))
-            if(wallnode) {
-                if(Number(child.getAttribute('width')) < rectangle.width) {
-                    x += Number(child.getAttribute('width'))
-                }
-                if(Number(child.getAttribute('height')) < rectangle.height) {
-                    y += Number(child.getAttribute('height'))
-                }
-                const childnode = transform(child)
-                if(childnode) svgnode.append(childnode)
-            }
-            transform(child)
+function transform(xmlnode) {
+    const xmlrect = new Rectangle(xmlnode)
+    if(xmlnode.tagName === 'wall') return wall(xmlnode)
+    else if(xmlnode.tagName === 'place') {
+        const svgnode = place(xmlnode)
+        let x = 0
+        let y = 0
+        const { width, height } = xmlrect
+        xmlrect.children.forEach(xmlchild => {
+            const rectchild = new Rectangle(xmlchild)
+            if(!xmlchild.hasAttribute('width')) rectchild.width = width
+            if(!xmlchild.hasAttribute('height')) rectchild.height = height
+            if(!xmlchild.hasAttribute('x')) rectchild.x = x
+            if(!xmlchild.hasAttribute('y')) rectchild.y = y
+            if(rectchild.width < width) x += rectchild.width
+            if(rectchild.height < height) y += rectchild.height
+            const svgchild = transform(xmlchild)
+            if(svgchild) svgnode.append(svgchild)
+            transform(xmlchild)
         })
         return svgnode
     }
