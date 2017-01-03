@@ -1,38 +1,44 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<space>
-    <place name="fusion" type="studio">
-        <place name="techno" type="office"/>
-        <wall orientation="vertical" type="brick"/>
-        <place name="operate">
-            <place name="classic">
-                <place name="intro" type="common"/>
-                <wall orientation="vertical" type="block"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml-stylesheet href="studio.xml.css"?>-->
+<place name="fusion" type="studio" height="1020">
+    <wall/>
+    <!--<place name="operate">
+        <place>
+            <place name="classic" width="632">
+                <place name="intro" type="common" height="180"/>
+                <wall type="block" height="20"/>
                 <place name="do">
-                    <place name="start" type="common">
-                        <place name="base" type="common"/>
-                        <wall orientation="vertical" type="gas"/>
+                    <place name="start" type="common" height="445">
+                        <place name="base" type="common" width="170"/>
+                        <wall type="gas" width="20"/>
                         <place name="piano" type="work"/>
                     </place>
-                    <wall orientation="horizontal" type="gas"/>
+                    <wall type="gas" height="20"/>
                     <place name="forte" type="work"/>
                 </place>
             </place>
-            <wall orientation="vertical" type="block"/>
+            <wall type="block" width="20"/>
             <place name="modern">
-                <place name="concrete">
-                    <place name="social" type="common"/>
-                    <wall orientation="horizontal" type="gypsum"/>
-                    <place name="pantry" type="storage"/>
+                <place>
+                    <place name="concrete"/>
+                    <wall type="block" height="20" width="633"/>
+                    <place name="radio" width="613">
+                        <place name="sol" type="work" height="380"/>
+                        <wall type="block" height="20"/>
+                        <place name="fa" type="work"/>
+                    </place>
                 </place>
-                <angle orientation="left bottom"/>
-                <place name="ancient">
-                    <place name="sol" type="work"/>
-                    <wall orientation="horizontal" type="block"/>
-                    <place name="fa" type="work"/>
+                <wall type="block" width="20" height="-830"/>
+                <place name="common">
+                    <place name="pass"/>
+                    <wall type="gypsum" height="20"/>
+                    <place name="pantry" height="160"/>
                 </place>
-                <wall type="gypsum"/>
-                <place name="neo" type="work"/>
             </place>
         </place>
+        <wall type="gypsum" width="20"/>
+        <place name="neo" type="work" width="438"/>
     </place>
-</space>
+    <wall type="brick" width="40"/>
+    <place name="techno" type="office" width="328"/>-->
+</place>

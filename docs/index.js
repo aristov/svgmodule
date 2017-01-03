@@ -6,6 +6,7 @@ const height = 1020
 
 const technooffice = {
     className : 'office',
+    id : 'techno',
     x, y,
     width : 328,
     height,
@@ -13,28 +14,33 @@ const technooffice = {
 
 const brickwall = {
     className : 'wall',
-    x : technooffice.width, y,
+    x : technooffice.width,
+    y,
     width : 40,
     height
 }
 
 const neoroom = {
     className : 'room',
+    id : 'neo',
     tabIndex : 0,
-    x : brickwall.x + brickwall.width, y,
+    x : brickwall.x + brickwall.width,
+    y,
     width : 438,
     height
 }
 
 const gypsumwall = {
     className : 'wall',
-    x : neoroom.x + neoroom.width, y,
+    x : neoroom.x + neoroom.width,
+    y,
     width : 20,
     height,
 }
 
 const pantryoffice = {
     className : 'office',
+    id : 'pantry',
     x : gypsumwall.x + gypsumwall.width,
     y,
     width : 142,
@@ -65,24 +71,24 @@ const blockwall = {
     height
 }
 
-const classicway = {
+const intro = {
     className : 'way',
     x : blockwall.x + blockwall.width,
     y : 840,
     width : 632,
-    height,
+    height : 180,
 }
 
 const studiospace = {
     x : 0, y,
-    width : classicway.x + classicway.width,
+    width : intro.x + intro.width,
     height : height,
     stroke : '#000',
     strokeWidth : 1,
     fill : 'transparent'
 }
 
-const cornerwall = {
+const angle = {
     className : 'wall',
     points : [
         [modernway.x, 0],
@@ -157,7 +163,7 @@ const stairwall = {
     height : 445
 }
 
-const stairway = {
+const base = {
     className : 'way',
     x : studiospace.width - 170,
     y : classicwall.y + classicwall.height,
@@ -165,20 +171,20 @@ const stairway = {
     height : 445
 }
 
-const pianoroom = {
+const piano = {
     className : 'room',
     tabIndex : 0,
     x : forteroom.x,
     y : classicwall.y + classicwall.height,
     width : stairwall.x - blockwall.x - 20,
-    height : stairway.height
+    height : base.height
 }
 
 const svgroot = svg({
-    width : studiospace.width + 50,
-    height : studiospace.height + 50,
-    style : { transform : 'scale(0.50) translate(2425px, 1190px) rotate(180deg)' },
-    viewBox : [-50, -50, studiospace.width + 50, studiospace.height + 50].join(),
+    width : studiospace.width,
+    height : studiospace.height,
+    style : { transform : 'translate(2253px, 1020px) rotate(180deg)' },
+    viewBox : [0, 0, studiospace.width, studiospace.height].join(),
     children : [
         rect(studiospace),
         rect(technooffice),
@@ -187,17 +193,17 @@ const svgroot = svg({
         rect(gypsumwall),
         rect(pantryoffice),
         rect(pantrywall),
-        polygon(cornerwall),
+        polygon(angle),
         rect(blockwall),
         rect(modernwall),
         rect(classicwall),
-        rect(classicway),
+        rect(intro),
         rect(stairwall),
         rect(faroom),
         rect(solroom),
         rect(forteroom),
-        rect(stairway),
-        rect(pianoroom),
+        rect(base),
+        rect(piano),
         polygon(cornerway),
     ]
 })
