@@ -1,4 +1,4 @@
-import { SVGDOMAssembler } from '../lib/assembler'
+import { SVGDOMAssembler } from '../lib/svgassembler'
 import { rect } from '../lib/svgdom'
 
 const { map } = Array.prototype
