@@ -1,0 +1,47 @@
+<!doctype html>
+<title>IMG to SVG</title>
+<script src="../dist/dist.window.svgmodule.js"></script>
+<img src=pipik.jpg
+     alt=pip
+     title="source IMG"
+     hidden
+     onload="{
+
+    const rgba = (r, g, b, a) => `rgba(${ [r, g, b, a / 255] })`
+    const { SVGDOMAssembler, rect } = svgmodule
+    const { assign } = Object
+
+    const readcanvas = this.nextElementSibling
+    const { width, height } = this
+    const size = { width, height }
+    assign(readcanvas, size)
+    const readctx = readcanvas.getContext('2d')
+    readctx.drawImage(this, 0, 0)
+
+    const drawcanvas = readcanvas.nextElementSibling
+    assign(drawcanvas, size)
+    const drawctx = drawcanvas.getContext('2d')
+
+
+    const drawsvg = drawcanvas.nextElementSibling
+    const assembler = new SVGDOMAssembler(drawsvg)
+    assign(assembler, size)
+
+    let c = 0
+    const { data : d } = readctx.getImageData(0, 0, width, height)
+    for(let y = -10; y < width - 10; y++) {
+        for(let x = 0; x < height; x++) {
+            if(y % 10 || x % 10) {}
+            else {
+                const fill = rgba(d[c], d[c + 1], d[c + 2], d[c + 3])
+                drawctx.fillStyle = fill
+                drawctx.fillRect(x, y, 10, 10)
+                drawsvg.append(rect({ width : 10, height : 10, x : x, y, fill }))
+            }
+            c += 4
+        }
+    }
+}">
+<canvas title="read CANVAS" hidden>read</canvas>
+<canvas title="draw CANVAS" hidden>draw</canvas>
+<svg aria-label="draw SVG" style="transform: scale(1);"></svg>

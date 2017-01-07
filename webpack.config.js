@@ -95,9 +95,9 @@ switch(env.ENTRY) {
     default:
         assign(module.exports, {
             entry : {
-                shim : ['./shim'],
-                htmlmodule : ['./lib'],
-                'window.htmlmodule' : ['./lib/window.htmlmodule']
+                // shim : ['./shim'],
+                svgmodule : ['./lib'],
+                'window.svgmodule' : ['./lib/window.svgmodule']
             },
             output : {
                 path : path.join(__dirname, '/dist'),
