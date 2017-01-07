@@ -4,7 +4,6 @@
 <img src=pipik.jpg
      alt=pip
      title="source IMG"
-     hidden
      onload="{
 
     const rgba = (r, g, b, a) => `rgba(${ [r, g, b, a / 255] })`
@@ -28,20 +27,25 @@
     assign(assembler, size)
 
     let c = 0
+    const pixelsize = 10
     const { data : d } = readctx.getImageData(0, 0, width, height)
     for(let y = 0; y < width; y++) {
         for(let x = 0; x < height; x++) {
-            if(y % 10 || x % 10) {}
+            if(y % pixelsize || x % pixelsize) {}
             else {
                 const fill = rgba(d[c], d[c + 1], d[c + 2], d[c + 3])
                 drawctx.fillStyle = fill
-                drawctx.fillRect(x, y, 10, 10)
-                drawsvg.append(rect({ width : 10, height : 10, x : x, y, fill }))
+                drawctx.fillRect(x, y, pixelsize, pixelsize)
+                drawsvg.append(rect({
+                    x, y, fill,
+                    width : pixelsize,
+                    height : pixelsize,
+                }))
             }
             c += 4
         }
     }
 }">
-<canvas title="read CANVAS" hidden>read</canvas>
-<canvas title="draw CANVAS" hidden>draw</canvas>
-<svg aria-label="draw SVG" style=transform:scale(1);></svg>
+<canvas title="read CANVAS">read</canvas>
+<canvas title="draw CANVAS">draw</canvas>
+<svg aria-label="draw SVG"></svg>
