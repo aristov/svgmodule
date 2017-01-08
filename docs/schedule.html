@@ -1,19 +1,70 @@
 <!doctype html>
 <meta charset=utf-8>
 <title>Schedule</title>
-<body>
+<link rel=stylesheet href=schedule.css>
 <script src=../../htmlmodule/dist/dist.window.htmlmodule.min.js></script>
-<script>
+<script>{
     const { htmlmodule } = window
-    const { body, table, tr, th, td } = htmlmodule
+    const { body, table, thead, tbody, tr, th, td } = htmlmodule
+    const { prototype : { forEach } } = Array
+
     const hours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     const minutes = ['00', '30']
-    const grid = table(hours.map(
-        hour => minutes.map(
-            minute => tr([
+    const ARROW_KEYS = ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft']
+
+    const grid = table({
+        onkeydown : event => {
+            const { key, target, shiftKey } = event
+            if(target.tagName === 'TD' && ARROW_KEYS.includes(key)) {
+                const row = target.parentNode
+                let newRow, newCell
+                switch(key) {
+                    case 'ArrowUp':
+                        newRow = row.previousSibling
+                        event.preventDefault()
+                        break
+                    case 'ArrowDown':
+                        newRow = row.nextSibling
+                        event.preventDefault()
+                        break
+                    case 'ArrowLeft':
+                        newCell = target.previousSibling
+                        break
+                    case 'ArrowRight':
+                        newCell = target.nextSibling
+                        break
+                }
+                if(newRow) newCell = newRow.cells[target.cellIndex]
+                if(newCell && newCell.tagName === 'TD') {
+                    if(shiftKey) {
+                        target.setAttribute('aria-selected', 'true')
+                        newCell.setAttribute('aria-selected', 'true')
+                    }
+                    else {
+                        forEach.call(grid.rows, row => forEach.call(row.cells, cell => {
+                            cell.removeAttribute('aria-selected')
+                        }))
+                        target.tabIndex = -1
+                        newCell.tabIndex = 0
+                        newCell.focus()
+                    }
+                    const current = grid.querySelector('[aria-current]')
+                    if(current) current.removeAttribute('aria-current')
+                    newCell.setAttribute('aria-current', 'true')
+                }
+            }
+        },
+        children : [
+            thead(tr([th(), th('Neutral'), th('Do forte'), th('Do piano'), th('Sol'), th('Fa')])),
+            tbody(hours.map((hour, h) => minutes.map((minute, m) => tr([
                 th(hour + ':' + minute),
-                td('—')
+                td({ tabIndex : h + m? -1 : 0, children : '' }),
+                td({ tabIndex : -1, children : '' }),
+                td({ tabIndex : -1, children : '' }),
+                td({ tabIndex : -1, children : '' }),
+                td({ tabIndex : -1, children : '' }),
             ]))))
+        ]
+    })
     document.body = body(grid)
-</script>
-</body>
+}</script>
