@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset=utf-8>
+<title>Schedule</title>
+<body>
+<script src=../../htmlmodule/dist/dist.window.htmlmodule.min.js></script>
+<script>
+    const { htmlmodule } = window
+    const { body, table, tr, th, td } = htmlmodule
+    const hours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    const minutes = ['00', '30']
+    const grid = table(hours.map(
+        hour => minutes.map(
+            minute => tr([
+                th(hour + ':' + minute),
+                td('—')
+            ]))))
+    document.body = body(grid)
+</script>
+</body>
