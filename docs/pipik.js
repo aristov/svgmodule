@@ -27,12 +27,13 @@
                 }
             })
         }
-        onArrowKey({ key, target }) {
+        onArrowKey({ key, metaKey, target }) {
+            const step = metaKey? 10 : 1
             switch(key) {
-                case 'ArrowUp': this.y--; break
-                case 'ArrowDown': this.y++; break
-                case 'ArrowLeft': this.x--; break
-                case 'ArrowRight': this.x++; break
+                case 'ArrowUp': this.y -= step; break
+                case 'ArrowDown': this.y += step; break
+                case 'ArrowLeft': this.x -= step; break
+                case 'ArrowRight': this.x += step; break
             }
             target.parentNode.append(target)
             target.focus()
@@ -40,6 +41,14 @@
     }
     const moverectmap = rectlist.map(rect => new MoveRect(rect))
 
-    console.log(moverectmap)
+    // document.documentElement.addEventListener('focus', onfocus, true)
+
+    function onfocus(event) {
+        if(event.target.tagName === 'rect') {
+            console.log(event)
+        }
+    }
+
+    // console.log(moverectmap)
     // console.log(JSON.stringify(colorpixelset))
 }
