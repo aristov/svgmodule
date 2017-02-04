@@ -5,24 +5,31 @@ class Rectangle extends XMLDOMAssembler {
     set width(width) {
         this.node.setAttribute('width', width)
     }
+
     get width() {
         return Number(this.node.getAttribute('width'))
     }
+
     set height(height) {
         this.node.setAttribute('height', height)
     }
+
     get height() {
         return Number(this.node.getAttribute('height'))
     }
+
     set x(x) {
         this.node.setAttribute('x', x)
     }
+
     get x() {
         return Number(this.node.getAttribute('x'))
     }
+
     set y(y) {
         this.node.setAttribute('y', y)
     }
+
     get y() {
         return Number(this.node.getAttribute('y'))
     }
@@ -79,9 +86,17 @@ function transform(instance) {
 const xmlroot = document.documentElement
 
 xmlroot.replaceWith(svg({
-    id : 'root',
-    children : [
-        rect({ width: '100%', height: '100%' }),
-        transform(new Rectangle(xmlroot))
-    ]
+    width: '100%',
+    height: '100%',
+    style : { backgroundColor : '#307' },
+    children : svg({
+        id : 'root',
+        width : '100%',
+        height : '100%',
+        viewBox : '0 0 2254 1021',
+        children : [
+            rect({ width : '100%', height : '100%' }),
+            transform(new Rectangle(xmlroot))
+        ]
+    })
 }))

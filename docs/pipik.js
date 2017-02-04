@@ -28,7 +28,7 @@
             })
         }
         onArrowKey({ key, metaKey, target }) {
-            const step = metaKey? 10 : 1
+            const step = metaKey? 100 : 1
             switch(key) {
                 case 'ArrowUp': this.y -= step; break
                 case 'ArrowDown': this.y += step; break
