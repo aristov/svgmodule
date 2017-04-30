@@ -74,7 +74,7 @@ switch(env.ENTRY) {
     case 'index':
         assign(module.exports, {
             entry : {
-                index : ['./docs/pipik'],
+                index : ['./docs/studio'],
             },
             output : {
                 path : path.join(__dirname, '/dist/docs'),

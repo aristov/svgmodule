@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <title>IMG to SVG</title>
 <script src="../dist/dist.window.svgmodule.js"></script>
-<img src=pipik.jpg
+<img src=fusionlogo.png
      alt=pip
      title="source IMG"
      onload="{
@@ -17,6 +17,7 @@
     const readcanvas = this.nextElementSibling
     const { width, height } = this
     const size = { width, height }
+    
     assign(readcanvas, size)
     const readctx = readcanvas.getContext('2d')
     readctx.drawImage(this, 0, 0)
@@ -30,29 +31,29 @@
     assign(assembler, size)
 
     let c = 0
-    const pixelsize = 10
-    const { data : d } = readctx.getImageData(0, 0, width, height)
+    const pixelsize = 1
+    const { data } = readctx.getImageData(0, 0, width, height)
     const fills = {}
-    for(let y = 0; y < width; y++) {
-        for(let x = 0; x < height; x++) {
+    for(let y = 0; y < height; y++) {
+        for(let x = 0; x < width; x++) {
             if(y % pixelsize || x % pixelsize) {}
             else {
-                const r = d[c]
-                const g = d[c + 1]
-                const b = d[c + 2]
-                if(r + g + b < 750) {
+                const r = data[c]
+                const g = data[c + 1]
+                const b = data[c + 2]
+//                if(r + g + b < 750) {
                     const fill = hexcolor(r, g, b)
                     if(fill in fills) fills[fill]++
                     else fills[fill] = 0
                     drawctx.fillStyle = fill
                     drawctx.fillRect(x, y, pixelsize, pixelsize)
                     drawsvg.append(rect({ x, y, fill }))
-                }
+//                }
             }
             c += 4
         }
     }
-    let max = 0
+    /*let max = 0
     let maxfill
     Object.keys(fills).forEach(fill => {
         const times = fills[fill]
@@ -69,8 +70,10 @@
             `rect{width:${pixelsize}px;height:${pixelsize}px;}`,
             `rect:not([fill]){fill:${maxfill}}`
         ]))
-    }
+    }*/
+    drawsvg.append(style(`rect{width:${pixelsize}px;height:${pixelsize}px;}`))
 }">
 <canvas title="read CANVAS">read</canvas>
 <canvas title="draw CANVAS">draw</canvas>
 <svg aria-label="draw SVG"></svg>
+<style>body { background: black; }</style>

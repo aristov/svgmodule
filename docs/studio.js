@@ -43,7 +43,7 @@ function place(instance) {
         id : instance.id,
         classList : [instance.node.tagName, type],
         tabIndex : type === 'work'? 0 : undefined,
-        children : !hidden && rect({
+        children : hidden || rect({
             width : instance.width,
             height : instance.height
         })
