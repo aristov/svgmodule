@@ -2,6 +2,34 @@
   "name": "svgmodule",
   "version": "0.0.1",
   "description": "SVG DOM assembler",
+  "homepage": "https://aristov.github.io/svgmodule",
+  "bugs": "https://github.com/aristov/svgmodule/issues",
+  "license": "MIT",
+  "author": "Vyacheslav Aristov <vv.aristov@gmail.ru>",
+  "files": [
+    "lib"
+  ],
+  "main": "lib",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aristov/svgmodule.git"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -w"
+  },
+  "engines": {
+    "node": ">=0.6"
+  },
+  "dependencies": {
+    "xmlmodule": "github:aristov/xmlmodule"
+  },
+  "devDependencies": {
+    "webpack": "^4.16.4"
+  },
   "keywords": [
     "SVG",
     "DOM",
@@ -37,35 +65,5 @@
     "TSpan",
     "Use",
     "View"
-  ],
-  "homepage": "https://aristov.github.io/svgmodule",
-  "bugs": "https://github.com/aristov/svgmodule/issues",
-  "license": "MIT",
-  "author": "Vyacheslav Aristov <vv.aristov@gmail.ru>",
-  "files": [
-    "lib",
-    "shim"
-  ],
-  "main": "lib",
-  "directories": {
-    "dist": "dist",
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aristov/svgmodule.git"
-  },
-  "scripts": {
-    "build": "webpack",
-    "watch": "webpack -w"
-  },
-  "engines": {
-    "node": ">=0.6"
-  },
-  "dependencies": {
-    "xmlmodule": "github:aristov/xmlmodule"
-  },
-  "devDependencies": {
-    "webpack": "^4.16.4"
-  }
+  ]
 }
