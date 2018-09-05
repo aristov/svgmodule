@@ -1,6 +1,6 @@
 {
   "name": "svgmodule",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "SVG DOM assembler",
   "homepage": "https://aristov.github.io/svgmodule",
   "bugs": "https://github.com/aristov/svgmodule/issues",
