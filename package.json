@@ -29,7 +29,7 @@
     "xmlmodule": "github:aristov/xmlmodule"
   },
   "devDependencies": {
-    "webpack": "^4.16.4"
+    "webpack": "^5.75.0"
   },
   "keywords": [
     "SVG",
